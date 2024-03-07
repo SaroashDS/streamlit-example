@@ -27,9 +27,10 @@ elif page == "Fulfillments":
     # Logic to navigate to fulfillments page
 
 else:
-    if st.button("Send"):
+    with st.form(key='my_form'):
         prompt = st.text_input("Your message")
-        if prompt:
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            st.write("user", ": ", prompt)
-            # Logic for bot response
+        if st.form_submit_button("Send"):
+            if prompt:
+                st.session_state.messages.append({"role": "user", "content": prompt})
+                st.write("user", ": ", prompt)
+                # Logic for bot response
