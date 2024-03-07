@@ -1,47 +1,31 @@
 import streamlit as st
 
-st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Home", "Entities", "Intents", "Fulfillments"])
+# Sample dictionary for bot responses (you can replace this with your populated dictionary)
+bot_responses = {
+    "hello": "Hi there! How can I assist you today?",
+    "how are you?": "I'm just a bot, but thanks for asking!",
+    "bye": "Goodbye! Have a great day!"
+}
 
-st.title("💬 Chatbot")
+# Function to generate bot responses
+def generate_response(user_input):
+    user_input = user_input.lower()
+    if user_input in bot_responses:
+        return bot_responses[user_input]
+    else:
+        return "Sorry, I didn't understand that."
 
-if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+# Streamlit app layout
+st.title("Chatbot Interface")
 
-for msg in st.session_state.messages:
-    st.write(msg["role"], ": ", msg["content"])
+# User input text box
+user_input = st.text_input("User Input")
 
-if page == "Entities":
-    st.session_state.messages.append({"role": "user", "content": "Entities page"})
-    st.write("user", ": ", "Entities page")
-    # Logic to navigate to entities page
-
-elif page == "Intents":
-    st.session_state.messages.append({"role": "user", "content": "Intents page"})
-    st.write("user", ": ", "Intents page")
-    # Logic to navigate to intents page
-
-elif page == "Fulfillments":
-    st.session_state.messages.append({"role": "user", "content": "Fulfillments page"})
-    st.write("user", ": ", "Fulfillments page")
-    # Logic to navigate to fulfillments page
-
-else:
-    with st.form(key='my_form'):
-        prompt = st.text_input("Your message")
-        if st.form_submit_button("Send"):
-            if prompt:
-                st.session_state.messages.append({"role": "user", "content": prompt})
-                st.write("user", ": ", prompt)
-                # Logic for bot response
-
-# Buttons for additional actions
-if st.sidebar.button("Settings"):
-    st.session_state.messages.append({"role": "user", "content": "Settings page"})
-    st.write("user", ": ", "Settings page")
-    # Logic to navigate to settings page
-
-if st.sidebar.button("Help"):
-    st.session_state.messages.append({"role": "user", "content": "Help page"})
-    st.write("user", ": ", "Help page")
-    # Logic to navigate to help page
+# Button to submit user input
+if st.button("Send"):
+    # Display user input
+    st.text("User: " + user_input)
+    
+    # Generate and display bot response
+    bot_response = generate_response(user_input)
+    st.text("Bot: " + bot_response)
