@@ -62,93 +62,33 @@ def main():
             .sidebar .sidebar-content .block-container {
                 color: white;
             }
-            .stRadio div div {
-                color: white;
-            }
-            .stRadio input:checked + label {
-                background-color: #4CAF50;
-            }
-            .stRadio input:checked + label:after {
-                background-color: white;
-            }
-            .chat-container {
-                background-color: white;
-                border-radius: 20px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 20px;
-                margin-bottom: 20px;
-                max-width: 600px;
-            }
-            .user-message {
-                background-color: #e5f0ff;
-                color: black;
-                border-radius: 20px;
-                padding: 10px 15px;
-                margin-bottom: 10px;
-                max-width: 70%;
-                float: right;
-            }
-            .bot-message {
-                background-color: #f3f6f8;
-                color: black;
-                border-radius: 20px;
-                padding: 10px 15px;
-                margin-bottom: 10px;
-                max-width: 70%;
-                float: left;
-            }
-            .subheader {
-                font-size: 24px;
-                font-weight: bold;
-                color: #4CAF50;
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-            .table-container {
-                background-color: white;
-                border-radius: 20px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                padding: 20px;
-                margin-bottom: 20px;
-            }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-            th, td {
-                padding: 8px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
-            }
-            th {
-                background-color: #4CAF50;
-                color: white;
-            }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
-    # Sidebar navigation
-    page = st.sidebar.button(
-        "Navigation",
-        ["Entities", "Intents", "Fulfillments", "Chatbot"],
-        index=3  # Chatbot is default page
-    )
+    # Sidebar navigation using buttons
+    page = st.sidebar.button("Entities")
 
-    if page == "Entities":
+    if page:
         st.subheader("Entities")
         display_table(sample_entities, ["name", "type"])
 
-    elif page == "Intents":
+    page = st.sidebar.button("Intents")
+
+    if page:
         st.subheader("Intents")
         display_table(sample_intents, ["name", "action"])
 
-    elif page == "Fulfillments":
+    page = st.sidebar.button("Fulfillments")
+
+    if page:
         st.subheader("Fulfillments")
         display_table(sample_fulfillments, ["name", "type"])
 
-    else:
+    page = st.sidebar.button("Chatbot")
+
+    if page:
         st.subheader("Chatbot")
         # Embed Dialogflow bot iframe
         st.markdown(
