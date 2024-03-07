@@ -16,19 +16,31 @@ def generate_response(user_input):
         return "Sorry, I didn't understand that."
 
 # Streamlit app layout
-st.title("Chatbot Interface")
+st.sidebar.title("Navigation")
+button_pressed = st.sidebar.radio("Go to", ["Home", "Entities", "Intents", "Fulfillments"])
 
-# Chat area to display messages
-chat_area = st.empty()
+if button_pressed == "Home":
+    st.title("💬 Chatbot - Home")
+    # Chat area to display messages
+    chat_area = st.empty()
 
-# User input text box
-user_input = st.text_input("User Input")
+    # User input text box
+    user_input = st.text_input("User Input")
 
-# Button to submit user input
-if st.button("Send"):
-    # Display user input
-    chat_area.text("User: " + user_input)
-    
-    # Generate and display bot response
-    bot_response = generate_response(user_input)
-    chat_area.text("Bot: " + bot_response)
+    # Button to submit user input
+    if st.button("Send"):
+        # Display user input
+        chat_area.text("User: " + user_input)
+
+        # Generate and display bot response
+        bot_response = generate_response(user_input)
+        chat_area.text("Bot: " + bot_response)
+
+elif button_pressed == "Entities":
+    st.title("💬 Entities")
+
+elif button_pressed == "Intents":
+    st.title("💬 Intents")
+
+elif button_pressed == "Fulfillments":
+    st.title("💬 Fulfillments")
