@@ -1,24 +1,11 @@
 import streamlit as st
 
-# Sample dictionary for bot responses (you can replace this with your populated dictionary)
+# Sample dictionary for bot responses
 bot_responses = {
     "hello": "Hi there! How can I assist you today?",
     "how are you?": "I'm just a bot, but thanks for asking!",
     "bye": "Goodbye! Have a great day!"
 }
-
-# Sample dictionary for entities, intents, and fulfillments
-sample_entities = ["Entity 1", "Entity 2", "Entity 3"]
-sample_intents = ["Intent 1", "Intent 2", "Intent 3"]
-sample_fulfillments = ["Fulfillment 1", "Fulfillment 2", "Fulfillment 3"]
-
-# Function to generate bot responses
-def generate_response(user_input):
-    user_input = user_input.lower()
-    if user_input in bot_responses:
-        return bot_responses[user_input]
-    else:
-        return "Sorry, I didn't understand that."
 
 # Streamlit app layout
 st.sidebar.title("Navigation")
@@ -35,6 +22,14 @@ fulfillments_button = st.sidebar.button("✅ Fulfillments")
 # Button for Home with emoji
 home_button = st.sidebar.button("🏠 Home")
 
+# Function to generate bot response
+def generate_response(user_input):
+    user_input = user_input.lower()
+    if user_input in bot_responses:
+        return bot_responses[user_input]
+    else:
+        return "Sorry, I didn't understand that."
+
 # Logic based on button presses
 if entities_button:
     st.title("💬 Entities")
@@ -44,7 +39,6 @@ if entities_button:
         pass
     # Display sample entities
     st.write("Sample Entities:")
-    st.table(sample_entities)
 
 elif intents_button:
     st.title("💬 Intents")
@@ -54,7 +48,6 @@ elif intents_button:
         pass
     # Display sample intents
     st.write("Sample Intents:")
-    st.table(sample_intents)
 
 elif fulfillments_button:
     st.title("💬 Fulfillments")
@@ -63,8 +56,6 @@ elif fulfillments_button:
         # Logic to add fulfillment
         pass
     # Display sample fulfillments
-    st.write("Sample Fulfillments:")
-    st.table(sample_fulfillments)
 
 elif home_button:
     st.title("💬 Chatbot - Home")
@@ -81,4 +72,4 @@ elif home_button:
 
         # Generate and display bot response
         bot_response = generate_response(user_input)
-        chat_area.text("Bot: " + bot_response)
+        chat_area.text("Bot: " + bot_response if bot_response else "Sorry, I didn't understand that.")
