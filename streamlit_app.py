@@ -69,7 +69,18 @@ def main():
 
     else:
         st.subheader("Chatbot")
-        st.write("Chatbot will be displayed here")
+        st.markdown(
+            """
+            <iframe
+                width="350"
+                height="430"
+                src="https://bot.dialogflow.com/64e14a52-901d-4cb4-b277-0193ed8cb812"
+                allow="microphone; camera; geolocation"
+                style="border: none;"
+            ></iframe>
+            """,
+            unsafe_allow_html=True
+        )
 
 if __name__ == "__main__":
     main()
