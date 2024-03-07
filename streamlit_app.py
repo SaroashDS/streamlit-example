@@ -34,3 +34,14 @@ else:
                 st.session_state.messages.append({"role": "user", "content": prompt})
                 st.write("user", ": ", prompt)
                 # Logic for bot response
+
+# Buttons for additional actions
+if st.sidebar.button("Settings"):
+    st.session_state.messages.append({"role": "user", "content": "Settings page"})
+    st.write("user", ": ", "Settings page")
+    # Logic to navigate to settings page
+
+if st.sidebar.button("Help"):
+    st.session_state.messages.append({"role": "user", "content": "Help page"})
+    st.write("user", ": ", "Help page")
+    # Logic to navigate to help page
