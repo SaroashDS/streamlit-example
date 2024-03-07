@@ -14,6 +14,7 @@ def generate_response(user_input):
         return bot_responses[user_input]
     else:
         return "Sorry, I didn't understand that."
+
 # Streamlit app layout
 st.sidebar.title("Navigation")
 
@@ -29,7 +30,9 @@ fulfillments_button = st.sidebar.button("✅ Fulfillments")
 # Button for Home with emoji
 home_button = st.sidebar.button("🏠 Home")
 
-
+# Initialize session state
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
 # Logic based on button presses
 if entities_button:
@@ -69,8 +72,10 @@ elif home_button:
     # Button to submit user input
     if st.button("Send"):
         # Display user input
+        st.session_state.messages.append({"role": "user", "content": user_input})
         chat_area.text("User: " + user_input)
 
         # Generate and display bot response
         bot_response = generate_response(user_input)
+        st.session_state.messages.append({"role": "bot", "content": bot_response})
         chat_area.text("Bot: " + bot_response if bot_response else "Sorry, I didn't understand that.")
