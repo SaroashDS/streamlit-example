@@ -17,9 +17,24 @@ def generate_response(user_input):
 
 # Streamlit app layout
 st.sidebar.title("Navigation")
-button_pressed = st.sidebar.radio("Go to", ["Home", "Entities", "Intents", "Fulfillments"])
 
-if button_pressed == "Home":
+# Button for Entities with emoji
+entities_button = st.sidebar.button("🔍 Entities")
+
+# Button for Intents with emoji
+intents_button = st.sidebar.button("💡 Intents")
+
+# Button for Fulfillments with emoji
+fulfillments_button = st.sidebar.button("✅ Fulfillments")
+
+# Logic based on button presses
+if entities_button:
+    st.title("💬 Entities")
+elif intents_button:
+    st.title("💬 Intents")
+elif fulfillments_button:
+    st.title("💬 Fulfillments")
+else:
     st.title("💬 Chatbot - Home")
     # Chat area to display messages
     chat_area = st.empty()
@@ -35,12 +50,3 @@ if button_pressed == "Home":
         # Generate and display bot response
         bot_response = generate_response(user_input)
         chat_area.text("Bot: " + bot_response)
-
-elif button_pressed == "Entities":
-    st.title("💬 Entities")
-
-elif button_pressed == "Intents":
-    st.title("💬 Intents")
-
-elif button_pressed == "Fulfillments":
-    st.title("💬 Fulfillments")
