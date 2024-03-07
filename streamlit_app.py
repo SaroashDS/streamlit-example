@@ -7,6 +7,13 @@ bot_responses = {
     "bye": "Goodbye! Have a great day!"
 }
 
+# Function to generate bot responses
+def generate_response(user_input):
+    user_input = user_input.lower()
+    if user_input in bot_responses:
+        return bot_responses[user_input]
+    else:
+        return "Sorry, I didn't understand that."
 # Streamlit app layout
 st.sidebar.title("Navigation")
 
@@ -22,13 +29,7 @@ fulfillments_button = st.sidebar.button("✅ Fulfillments")
 # Button for Home with emoji
 home_button = st.sidebar.button("🏠 Home")
 
-# Function to generate bot response
-def generate_response(user_input):
-    user_input = user_input.lower()
-    if user_input in bot_responses:
-        return bot_responses[user_input]
-    else:
-        return "Sorry, I didn't understand that."
+
 
 # Logic based on button presses
 if entities_button:
