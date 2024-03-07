@@ -130,7 +130,7 @@ def main():
     )
 
     # Sidebar navigation
-    page = st.sidebar.radio(
+    page = st.sidebar.button(
         "Navigation",
         ["Entities", "Intents", "Fulfillments", "Chatbot"],
         index=3  # Chatbot is default page
