@@ -18,14 +18,17 @@ def generate_response(user_input):
 # Streamlit app layout
 st.title("Chatbot Interface")
 
+# Chat area to display messages
+chat_area = st.empty()
+
 # User input text box
 user_input = st.text_input("User Input")
 
 # Button to submit user input
 if st.button("Send"):
     # Display user input
-    st.text("User: " + user_input)
+    chat_area.text("User: " + user_input)
     
     # Generate and display bot response
     bot_response = generate_response(user_input)
-    st.text("Bot: " + bot_response)
+    chat_area.text("Bot: " + bot_response)
