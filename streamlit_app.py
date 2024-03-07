@@ -23,12 +23,36 @@ sample_fulfillments = [
 # Function to display entities, intents, and fulfillments in a table
 def display_table(data, columns):
     df = pd.DataFrame(data)
-    st.write("<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>", unsafe_allow_html=True)
     st.table(df[columns])
 
 # Main Streamlit app
 def main():
-    st.title("Google Dialogflow Interface")
+    st.title("Custom Abacus Chatbot Interface")
+    st.markdown(
+        """
+        <style>
+            .css-1qj5a3p {
+                padding: 1rem 3rem;
+                font-size: 1.5rem;
+            }
+            .css-12q4g5o {
+                background-color: #2196F3 !important;
+            }
+            .css-ixm2db {
+                animation: css-2pcclh-unfadingAnimation 1s ease-in-out;
+            }
+            @keyframes css-2pcclh-unfadingAnimation {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     page = st.sidebar.radio("Navigation", ["Intents", "Entities", "Fulfillments", "Chatbot"])
 
     if page == "Entities":
