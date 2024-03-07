@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # Sample data for entities, intents, and fulfillments
 sample_entities = [
@@ -21,8 +22,9 @@ sample_fulfillments = [
 
 # Function to display entities, intents, and fulfillments in a table
 def display_table(data, columns):
+    df = pd.DataFrame(data)
     st.write("<style>div.Widget.row-widget.stRadio > div{flex-direction:row;}</style>", unsafe_allow_html=True)
-    st.table(data[columns])
+    st.table(df[columns])
 
 # Main Streamlit app
 def main():
