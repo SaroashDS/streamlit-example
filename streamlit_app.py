@@ -1,13 +1,6 @@
 import streamlit as st
 
-with st.sidebar:
-    st.text_input("Chatbot API Key", key="chatbot_api_key", type="password")
-    "[Get an API key](https://example.com)"
-    "[View the source code](https://example.com)"
-    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://example.com)"
-
 st.title("💬 Chatbot")
-st.caption("🚀 A Streamlit chatbot")
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
@@ -15,10 +8,22 @@ if "messages" not in st.session_state:
 for msg in st.session_state.messages:
     st.write(msg["role"], ": ", msg["content"])
 
-if prompt := st.text_input("Your message"):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    st.write("user", ": ", prompt)
-    # Replace this part with your bot logic
-    response = "This is a response from the bot."
-    st.session_state.messages.append({"role": "assistant", "content": response})
-    st.write("assistant", ": ", response)
+if st.button("Entities"):
+    st.session_state.messages.append({"role": "user", "content": "Entities page"})
+    st.write("user", ": ", "Entities page")
+    # Logic to navigate to entities page
+
+if st.button("Intents"):
+    st.session_state.messages.append({"role": "user", "content": "Intents page"})
+    st.write("user", ": ", "Intents page")
+    # Logic to navigate to intents page
+
+if st.button("Fulfillments"):
+    st.session_state.messages.append({"role": "user", "content": "Fulfillments page"})
+    st.write("user", ": ", "Fulfillments page")
+    # Logic to navigate to fulfillments page
+
+if st.button("Back to Home"):
+    st.session_state.messages.append({"role": "user", "content": "Back to Home"})
+    st.write("user", ": ", "Back to Home")
+    # Logic to navigate back to home page
