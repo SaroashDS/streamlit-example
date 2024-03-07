@@ -1,17 +1,44 @@
 import streamlit as st
 import pandas as pd
 
+# Sample data for entities, intents, and fulfillments
+sample_entities = [
+    {"name": "Entity1", "type": "Entity Type1"},
+    {"name": "Entity2", "type": "Entity Type2"},
+    {"name": "Entity3", "type": "Entity Type3"}
+]
+
+sample_intents = [
+    {"name": "Intent1", "action": "Action1"},
+    {"name": "Intent2", "action": "Action2"},
+    {"name": "Intent3", "action": "Action3"}
+]
+
+sample_fulfillments = [
+    {"name": "Fulfillment1", "type": "Type1"},
+    {"name": "Fulfillment2", "type": "Type2"},
+    {"name": "Fulfillment3", "type": "Type3"}
+]
+
+def display_table(data, columns):
+    df = pd.DataFrame(data)
+    st.table(df[columns])
+
 def main():
-    # Title and custom CSS for ChatGPT-inspired design
-    st.title("Custom Abacus Chatbot Interface")
+    # Custom CSS for ChatGPT-inspired design
     st.markdown(
         """
         <style>
-            .stApp {
+            /* ChatGPT-inspired design */
+            body {
+                font-family: Arial, sans-serif;
                 background-color: #f3f6f8;
-                font-family: 'Arial', sans-serif;
             }
-
+            .stApp {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
             .stButton>button {
                 background-color: #4CAF50;
                 color: white;
@@ -26,32 +53,24 @@ def main():
                 transition-duration: 0.4s;
                 cursor: pointer;
             }
-
             .stButton>button:hover {
                 background-color: #45a049;
             }
-
-            .stTextInput>div>div>input {
-                border-radius: 20px;
-                border: 2px solid #ddd;
-                padding: 10px;
-                width: calc(100% - 80px);
+            .sidebar .sidebar-content {
+                background-color: #2196F3;
             }
-
-            .stTextInput>div>div>button {
-                border-radius: 20px;
-                background-color: #4CAF50;
+            .sidebar .sidebar-content .block-container {
                 color: white;
-                border: none;
-                padding: 10px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
             }
-
+            .stRadio div div {
+                color: white;
+            }
+            .stRadio input:checked + label {
+                background-color: #4CAF50;
+            }
+            .stRadio input:checked + label:after {
+                background-color: white;
+            }
             .chat-container {
                 background-color: white;
                 border-radius: 20px;
@@ -60,7 +79,6 @@ def main():
                 margin-bottom: 20px;
                 max-width: 600px;
             }
-
             .user-message {
                 background-color: #e5f0ff;
                 color: black;
@@ -70,7 +88,6 @@ def main():
                 max-width: 70%;
                 float: right;
             }
-
             .bot-message {
                 background-color: #f3f6f8;
                 color: black;
@@ -80,7 +97,6 @@ def main():
                 max-width: 70%;
                 float: left;
             }
-
             .subheader {
                 font-size: 24px;
                 font-weight: bold;
@@ -88,7 +104,6 @@ def main():
                 margin-top: 20px;
                 margin-bottom: 10px;
             }
-
             .table-container {
                 background-color: white;
                 border-radius: 20px;
@@ -96,18 +111,15 @@ def main():
                 padding: 20px;
                 margin-bottom: 20px;
             }
-
             table {
                 width: 100%;
                 border-collapse: collapse;
             }
-
             th, td {
                 padding: 8px;
                 text-align: left;
                 border-bottom: 1px solid #ddd;
             }
-
             th {
                 background-color: #4CAF50;
                 color: white;
@@ -118,7 +130,11 @@ def main():
     )
 
     # Sidebar navigation
-    page = st.sidebar.radio("Navigation", ["Intents", "Entities", "Fulfillments", "Chatbot"])
+    page = st.sidebar.radio(
+        "Navigation",
+        ["Entities", "Intents", "Fulfillments", "Chatbot"],
+        index=3  # Chatbot is default page
+    )
 
     if page == "Entities":
         st.subheader("Entities")
@@ -134,24 +150,13 @@ def main():
 
     else:
         st.subheader("Chatbot")
-
-        # Chat container
-        st.markdown("<div class='chat-container'>", unsafe_allow_html=True)
-
-        # Bot messages
-        st.markdown("<div class='bot-message'>Hello! How can I assist you today?</div>", unsafe_allow_html=True)
-
-        # User input
-        user_input = st.text_input("You:", "")
-
-        # Send button
-        if st.button("Send"):
-            st.markdown(f"<div class='user-message'>{user_input}</div>", unsafe_allow_html=True)
-            # Here you would add the logic to process the user input and generate a bot response
-            # Replace the following line with your own bot response logic
-            st.markdown("<div class='bot-message'>This is a placeholder response from the bot.</div>", unsafe_allow_html=True)
-
-        st.markdown("</div>", unsafe_allow_html=True)
+        # Embed Dialogflow bot iframe
+        st.markdown(
+            """
+            <iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/64e14a52-901d-4cb4-b277-0193ed8cb812"></iframe>
+            """,
+            unsafe_allow_html=True
+        )
 
 if __name__ == "__main__":
     main()
