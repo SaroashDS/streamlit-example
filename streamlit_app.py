@@ -22,9 +22,6 @@ st.title("Chatbot Interface")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Chat area to display messages
-chat_area = st.empty()
-
 # User input text box
 user_input = st.text_input("User Input")
 
@@ -37,11 +34,17 @@ if st.button("Send"):
     bot_response = generate_response(user_input)
     st.session_state.messages.append({"role": "bot", "content": bot_response})
 
+# Chat area to display messages
+chat_area = st.empty()
+
 # Display messages
+chat_content = ""
 for message in st.session_state.messages:
     role = message["role"]
     content = message["content"]
     if role == "user":
-        chat_area.text("User: " + content)
+        chat_content += f"User: {content}\n"
     else:
-        chat_area.text("Bot: " + content)
+        chat_content += f"Bot: {content}\n"
+
+chat_area.text(chat_content)
