@@ -21,6 +21,14 @@ st.title("Chatbot Interface")
 # Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
+# Display messages
+for message in st.session_state.messages:
+    role = message["role"]
+    content = message["content"]
+    if role == "user":
+        st.markdown(f'<div style="background-color:#dff2e8;padding:10px;border-radius:10px;margin:5px">User: {content}</div>', unsafe_allow_html=True)
+    else:
+        st.markdown(f'<div style="background-color:#e6f2ff;padding:10px;border-radius:10px;margin:5px">Bot: {content}</div>', unsafe_allow_html=True)
 
 # User input text box
 user_input = st.text_input("User Input")
@@ -37,11 +45,3 @@ if st.button("Send"):
     # Reverse the order of messages to display the most recent at the top
     st.session_state.messages = st.session_state.messages[::-1]
 
-# Display messages
-for message in st.session_state.messages:
-    role = message["role"]
-    content = message["content"]
-    if role == "user":
-        st.markdown(f'<div style="background-color:#dff2e8;padding:10px;border-radius:10px;margin:5px">User: {content}</div>', unsafe_allow_html=True)
-    else:
-        st.markdown(f'<div style="background-color:#e6f2ff;padding:10px;border-radius:10px;margin:5px">Bot: {content}</div>', unsafe_allow_html=True)
