@@ -28,11 +28,11 @@ user_input = st.text_input("User Input")
 # Button to submit user input
 if st.button("Send"):
     # Display user input
-    st.session_state.messages.insert(0, {"role": "user", "content": user_input})
+    st.session_state.messages.append({"role": "user", "content": user_input})
     
     # Generate and display bot response
     bot_response = generate_response(user_input)
-    st.session_state.messages.insert(0, {"role": "bot", "content": bot_response})
+    st.session_state.messages.append({"role": "bot", "content": bot_response})
 
     # Reverse the order of messages to display the most recent at the top
     st.session_state.messages = st.session_state.messages[::-1]
