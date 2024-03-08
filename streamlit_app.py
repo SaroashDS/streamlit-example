@@ -28,25 +28,17 @@ user_input = st.text_input("User Input")
 # Button to submit user input
 if st.button("Send"):
     # Display user input
-    st.session_state.messages.append({"role": "user", "content": user_input})
+    st.session_state.messages.insert(0, {"role": "user", "content": user_input})
     
     # Generate and display bot response
     bot_response = generate_response(user_input)
-    st.session_state.messages.append({"role": "bot", "content": bot_response})
+    st.session_state.messages.insert(0, {"role": "bot", "content": bot_response})
 
 # Display messages
-chat_content = ""
-for message in st.session_state.messages:
+for message in reversed(st.session_state.messages):
     role = message["role"]
     content = message["content"]
     if role == "user":
-        chat_content += f"User: {content}\n"
+        st.markdown(f'<div style="background-color:#dff2e8;padding:10px;border-radius:10px;margin:5px">{content}</div>', unsafe_allow_html=True)
     else:
-        chat_content += f"Bot: {content}\n"
-
-# Show messages at the top
-st.text(chat_content)
-
-# Show slider after 4 messages
-if len(st.session_state.messages) > 4:
-    st.slider("Scroll to view older messages", 0, len(st.session_state.messages) - 4, value=0)
+        st.markdown(f'<div style="background-color:#e6f2ff;padding:10px;border-radius:10px;margin:5px">{content}</div>', unsafe_allow_html=True)
