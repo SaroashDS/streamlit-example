@@ -38,16 +38,10 @@ if st.button("Send"):
     st.session_state.messages.append({"role": "bot", "content": bot_response})
 
 # Display messages
-num_messages = len(st.session_state.messages)
-if num_messages > 0:
-    num_messages_displayed = min(num_messages, 4)
-    for i in range(num_messages - num_messages_displayed, num_messages):
-        role = st.session_state.messages[i]["role"]
-        content = st.session_state.messages[i]["content"]
-        if role == "user":
-            chat_area.text("User: " + content)
-        else:
-            chat_area.text("Bot: " + content)
-
-    if num_messages > 4:
-        st.slider("Scroll to view older messages", 0, num_messages - 4, value=num_messages - 4)
+for message in st.session_state.messages:
+    role = message["role"]
+    content = message["content"]
+    if role == "user":
+        chat_area.text("User: " + content)
+    else:
+        chat_area.text("Bot: " + content)
