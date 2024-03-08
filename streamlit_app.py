@@ -34,9 +34,6 @@ if st.button("Send"):
     bot_response = generate_response(user_input)
     st.session_state.messages.append({"role": "bot", "content": bot_response})
 
-# Chat area to display messages
-chat_area = st.empty()
-
 # Display messages
 chat_content = ""
 for message in st.session_state.messages:
@@ -47,4 +44,9 @@ for message in st.session_state.messages:
     else:
         chat_content += f"Bot: {content}\n"
 
-chat_area.text(chat_content)
+# Show messages at the top
+st.text(chat_content)
+
+# Show slider after 4 messages
+if len(st.session_state.messages) > 4:
+    st.slider("Scroll to view older messages", 0, len(st.session_state.messages) - 4, value=0)
